@@ -303,6 +303,14 @@ lav_fit_measures <- function(object, fit.measures = "all",
     ## re-assign TEST object that is used below
     object@test <- TEST <- FIT@test
     test.names <- unname(sapply(TEST, "[[", "test"))
+    
+    #vika: added the next lines to update the h1 slots 
+    #in FIT with values from h1.model for SRMR generalization
+    #the @logl update is not needed but for completeness
+    FIT@h1$implied <- h1.model@implied
+    FIT@h1$logl$loglik <- h1.model@loglik$loglik 
+    FIT@h1$logl$loglik.group <- h1.model@loglik$loglik.group 
+    object@h1 <- FIT@h1
   }
 
   # get index of standard.test in TEST

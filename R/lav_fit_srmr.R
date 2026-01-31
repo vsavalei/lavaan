@@ -29,7 +29,7 @@ lav_fit_srmr_mplus <- function(lavobject) {
   # please tag @TDJorgensen at the end of the commit message.
   for (g in 1:G) {
     # observed
-    if (!lavsamplestats@missing.flag) {
+    if (!lavsamplestats@missing.flag && is.null(lavh1$implied$cov[[g]]) && is.null(lavh1$implied$mean[[g]])) {
       if (lavobject@Model@conditional.x) {
         S <- lavsamplestats@res.cov[[g]]
         M <- lavsamplestats@res.int[[g]]
