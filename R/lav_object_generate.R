@@ -353,7 +353,11 @@ lav_object_catml <- function(lavobject = NULL) {
   # never rotate (new in 0.6-19), as we only need fit measures
   if (!is.null(partable_catml$efa)) {
     partable_catml$efa <- NULL
-    partable_catml$free <- partable_catml$free.unrotated
+    if (!is.null(partable_catml$free.unrotated)) {
+      partable_catml$free <- partable_catml$free.unrotated
+    }
+    # if free.unrotated does not exist (e.g., rotation = "none"), keep the
+    # current free column as-is; it already reflects the correct constraints
   }
 
   if (!all(lavdata@ov$type == "ordered")) {
